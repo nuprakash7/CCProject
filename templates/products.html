@@ -1,0 +1,29 @@
+<!-- products.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Products</h1>
+    {% for product in products %}
+        <div>
+            <h3>{{ product.name }}</h3>
+            <p>Description: {{ product.description }}</p>
+            <p>Price: ${{ product.price }}</p>
+            <img src = "{{product.image_url}}" height = "300" width = "300">
+            <form method="POST" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <input type="submit" value="Add to Cart">
+            </form>
+        </div>
+        <hr>
+    {% endfor %}
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('view_cart') }}" class="button">View Cart</a>
+    </div>
+</body>
+</html>
